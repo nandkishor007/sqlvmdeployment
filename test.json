@@ -56,7 +56,9 @@
             "adminUserName": "[parameters('adminUsername')]",
             "adminPassword": "[parameters('adminPassword')]",
             "publisher": "MicrosoftWindowsServer",
-            "offer": "WindowsServer"
+            "offer": "WindowsServer",
+           "storageAccountName": "[parameters('storageAcctName')]",
+      "storageAccountContainerName": "[parameters('storageAcctContainerName')]"
                  
           } 
     
