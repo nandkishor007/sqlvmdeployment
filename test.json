@@ -48,9 +48,43 @@
     "variables": {
         "vnetId": "[resourceId('ParagonDevOpsARMVNetRG','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "DomUserNameSlashes": "[concat('\\',parameters('DomUserName'))]",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
+       "VMObject": {
+            "Name": "[parameters('virtualMachineName')]",
+            "Size": "[parameters('virtualMachineSize')]",
+            "nicName": "[parameters('networkInterfaceName')]",
+            "adminUserName": "[parameters('adminUsername')]",
+            "adminPassword": "[parameters('adminPassword')]",
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer"
+                 
+          } 
+    
     },
     "resources": [
+        {
+            "name": "VMResource",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "dependsOn": [
+              "[resourceid('Microsoft.Resources/deployments/', 'StorageAccountResource')]",
+              "[resourceid('Microsoft.Resources/deployments/', 'NetworkInterfaceResource')]"
+              //        "[resourceid('Microsoft.Resources/deployments/', 'AvailabilitySetResource1')]"
+            ],
+            "properties": {
+              "mode": "Incremental",
+              "templateLink": {
+                //   "uri": "[concat(parameters('_artifactsLocation'),'/','VM.json', parameters('_artifactsLocationSasToken'))]",
+                "uri": "[variables('VMObject').Uri]",
+                "contentVersion": "1.0.0.0"
+              },
+              "parameters": {
+                "VMObject": {
+                  "value": "[variables('VMObject')]"
+                }
+              }
+            }
+          },
         {
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
