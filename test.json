@@ -56,9 +56,7 @@
             "adminUserName": "[parameters('adminUsername')]",
             "adminPassword": "[parameters('adminPassword')]",
             "publisher": "MicrosoftWindowsServer",
-            "offer": "WindowsServer",
-           "storageAccountName": "[parameters('storageAcctName')]",
-      "storageAccountContainerName": "[parameters('storageAcctContainerName')]"
+            "offer": "WindowsServer"
                  
           } 
     
@@ -69,7 +67,7 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
             "dependsOn": [
-              "[resourceid('Microsoft.Resources/deployments/', 'StorageAccountResource')]",
+              // "[resourceid('Microsoft.Resources/deployments/', 'StorageAccountResource')]",
               "[resourceid('Microsoft.Resources/deployments/', 'NetworkInterfaceResource')]"
               //        "[resourceid('Microsoft.Resources/deployments/', 'AvailabilitySetResource1')]"
             ],
