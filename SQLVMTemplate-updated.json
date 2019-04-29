@@ -132,7 +132,7 @@
                         "value": "eastus"
                     },
                     "fileUris": {
-                        "value": "https://iaasv2tempstoreseasia.blob.core.windows.net/vmextensionstemporary-10037ffeadfaff89-20190429105159010/Cloud-Domain-SQL-Install.ps1?sv=2017-04-17&sr=c&sig=OpN5sbCzM7JwLDq3wpQcxbVaXDrWGmrddFFsgrn%2F3JU%3D&se=2019-04-30T10%3A51%3A59Z&sp=rw"
+                        "value": "https://iaasv2tempstoreseasia.blob.core.windows.net/vmextensionstemporary-10037ffeadfaff89-20190429120755630/Cloud-Domain-SQL-Install.ps1?sv=2017-04-17&sr=c&sig=oY57hKWgrT4ck8JEVoAGzN1i04bv2utLJB539ReEibw%3D&se=2019-04-30T12%3A07%3A55Z&sp=rw"
                     }
                 }
             },
