@@ -184,7 +184,7 @@
             "name": "[concat(parameters('virtualMachineName'),'/joindomain')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-              "[resourceid('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName')]"
+              "[resourceid('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
             ],
             "properties": {
               "publisher": "Microsoft.Compute",
