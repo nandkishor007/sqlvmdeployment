@@ -181,10 +181,10 @@
             "comments": "Join domain - JsonADDomainExtension",
             "apiVersion": "2015-06-15",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('VMName'),'/joindomain')]",
+            "name": "[concat(parameters('virtualMachineName'),'/joindomain')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-              "[resourceid('Microsoft.Compute/virtualMachines/', parameters('VMName')]"
+              "[resourceid('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName')]"
             ],
             "properties": {
               "publisher": "Microsoft.Compute",
