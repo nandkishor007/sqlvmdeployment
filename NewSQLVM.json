@@ -215,7 +215,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "https://iaasv2tempstoreseasia.blob.core.windows.net/vmextensionstemporary-10037ffeadfaff89-20190509183332274/Disk-SQL-SSRS.ps1?sv=2017-04-17&sr=c&sig=l%2BZO1auNzPn7H7isajqgCE%2BHtYnDayM%2BCvcLfRNIAOk%3D&se=2019-05-10T18%3A33%3A32Z&sp=rw"
+                        "https://https://github.com/pgncloudadmin/sqlvmdeployment/Disk-SQL-SSRS.ps1"
                     ],
                     "commandToExecute": "[parameters('extensions_CustomScriptExtension_commandToExecute')]"
                 },
