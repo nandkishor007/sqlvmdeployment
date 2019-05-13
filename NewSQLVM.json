@@ -57,7 +57,13 @@
            "metadata": {
              "description": "Join to local domain."
            }
-         }
+         },
+	    "fileUris": {
+            "value": "https://raw.githubusercontent.com/pgncloudadmin/sqlvmdeployment/master/Disk-SQL-SSRS.ps1"
+        },
+        "arguments": {
+            "value": null
+        }
 
     },
     "variables": {
@@ -65,6 +71,10 @@
         "vnetId": "[resourceId('ParagonDevOpsARMVNetRG','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "DomUserNameSlashes": "[concat('\\',parameters('DomUserName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+	"UriFileNamePieces": "[split(parameters('fileUris'), '/')]",
+        "firstFileNameString": "[variables('UriFileNamePieces')[sub(length(variables('UriFileNamePieces')), 1)]]",
+        "firstFileNameBreakString": "[split(variables('firstFileNameString'), '?')]",
+        "firstFileName": "[variables('firstFileNameBreakString')[0]]"
     },
     "resources": [
         {
@@ -204,29 +214,22 @@
             }
           },
         {
-	    "name": "[concat(parameters('virtualMachineName'), '/CustomScriptExtension')]",
-	    "apiVersion": "2018-10-01",            
-	    "type": "Microsoft.Resources/deployments",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2015-06-15",
+            "name": "[concat(parameters('virtualMachineName'),'/CustomScriptExtension')]",
+            "location": "[parameters('location')]",
             "properties": {
-		"mode": "incremental",
-		"templateLink":{
-		"uri": "https://gallery.azure.com/artifact/20161101/Microsoft.CustomScriptExtension-arm.2.0.50/Artifacts/MainTemplate.json"
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.7",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris": "[split(parameters('fileUris'), ' ')]"
                 },
-                "parameters": {
-                    "vmName": {
-                        "value": "[parameters('virtualMachineName')]"
-                    },
-                    "location": {
-                        "value": "eastus"
-                    },
-                    "fileUris": {
-                        "value": "https://raw.githubusercontent.com/pgncloudadmin/sqlvmdeployment/master/Disk-SQL-SSRS.ps1"
-                    }
+                "protectedSettings": {
+                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', variables('firstFileName'), ' ', parameters('arguments'))]"
                 }
-            },
-            "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
-            ]
+            }
         }
         
     ],
