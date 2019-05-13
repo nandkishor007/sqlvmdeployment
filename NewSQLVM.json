@@ -207,7 +207,7 @@
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2018-10-01",
             "name": "[concat(parameters('virtualMachineName'), '/CustomScriptExtension')]",
-            "location": "eastus",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachineName'))]"
             ],
@@ -215,7 +215,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "https://https://github.com/pgncloudadmin/sqlvmdeployment/Disk-SQL-SSRS.ps1"
+                        "https://raw.githubusercontent.com/pgncloudadmin/sqlvmdeployment/master/Disk-SQL-SSRS.ps1"
                     ],
                     "commandToExecute": "[parameters('extensions_CustomScriptExtension_commandToExecute')]"
                 },
