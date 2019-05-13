@@ -204,26 +204,29 @@
             }
           },
         {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2018-10-01",
-            "name": "[concat(parameters('virtualMachineName'), '/CustomScriptExtension')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachineName'))]"
-            ],
+	    "name": "[concat(parameters('virtualMachineName'), '/CustomScriptExtension')]",
+	    "apiVersion": "2018-10-01",            
+	    "type": "Microsoft.Resources/deployments",
             "properties": {
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "fileUris": [
-                        "https://raw.githubusercontent.com/pgncloudadmin/sqlvmdeployment/master/Disk-SQL-SSRS.ps1"
-                    ],
-                    "commandToExecute": "[parameters('extensions_CustomScriptExtension_commandToExecute')]"
+		"mode": "incremental",
+		"templateLink":{
+		"uri": "https://gallery.azure.com/artifact/20161101/Microsoft.CustomScriptExtension-arm.2.0.50/Artifacts/MainTemplate.json"
                 },
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.7",
-                "protectedSettings": {}
-            }
+                "parameters": {
+                    "vmName": {
+                        "value": "[parameters('virtualMachineName')]"
+                    },
+                    "location": {
+                        "value": "eastus"
+                    },
+                    "fileUris": {
+                        "value": "https://raw.githubusercontent.com/pgncloudadmin/sqlvmdeployment/master/Disk-SQL-SSRS.ps1"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+            ]
         }
         
     ],
