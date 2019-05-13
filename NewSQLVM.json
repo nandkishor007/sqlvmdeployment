@@ -214,23 +214,30 @@
             }
           },
         {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2015-06-15",
-            "name": "[concat(parameters('virtualMachineName'),'/CustomScriptExtension')]",
-            "location": "[parameters('location')]",
-            "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.7",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "fileUris": "[split(parameters('fileUris'), ' ')]"
-                },
-                "protectedSettings": {
-                    "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ', variables('firstFileName'), ' ', parameters('arguments'))]"
-                }
-            }
-        }
+	"apiVersion": "2015-06-15",
+	"type": "Microsoft.Compute/virtualMachines/extensions",
+	"name": "SQL-Install",
+	"location": "[parameters('location')]",
+    	"dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+            	     ],
+	"properties": {
+	"publisher": "Microsoft.Compute",
+	"type": "CustomScriptExtension",
+	"typeHandlerVersion": "1.9",
+	"autoUpgradeMinorVersion": true,
+	"settings": {
+	"fileUris": [
+	"https://raw.githubusercontent.com/pgncloudadmin/sqlvmdeployment/master/Disk-SQL-SSRS.ps1"
+	]
+   },
+	"protectedSettings": {
+	"commandToExecute": "powershell -ExecutionPolicy Unrestricted -File Disk-SQL-SSRS.ps1",
+	"storageAccountName": "sajasontest1",
+	"storageAccountKey": "bHnRA1dHi/JYwQk2PJ/VwhxYDqpbtUt8QWV8/Yt+Z3IGQJ8jj829093Z3i+D2WAyTmjXBzRrKVbLsKnX3ejWzw=="
+		}
+	}
+  }
         
     ],
     "outputs": {
