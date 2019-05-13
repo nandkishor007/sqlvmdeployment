@@ -57,7 +57,16 @@
            "metadata": {
              "description": "Join to local domain."
            }
-         }
+         },
+	"SQLDATADriveCapacity": {
+          "type": "string"
+          },
+        "SQLLOGSDriveCapacity": {
+          "type": "string"
+         },
+       "SQLTEMPDriveCapacity": {
+          "type": "string"
+      }
 	    
     },
     "variables": {
@@ -123,7 +132,7 @@
                     "dataDisks":[ 
                         {
                            "name": "[concat(parameters('virtualMachineName'),'-datadisk1')]",
-                           "diskSizeGB": 200,  
+                           "diskSizeGB": "[parameters('SQLDATADriveCapacity')]",  
                             "lun": 0,
                             "createOption":"Empty",
                            "managedDisk" :{
@@ -133,7 +142,7 @@
                         },
                         {
                             "name": "[concat(parameters('virtualMachineName'),'-logdisk1')]",
-                            "diskSizeGB": 200,  
+                            "diskSizeGB": "[parameters('SQLLOGSDriveCapacity')]",  
                             "lun": 1,
                             "createOption":"Empty",
                            "managedDisk" :{
@@ -142,7 +151,7 @@
                        },
                        {
                        "name": "[concat(parameters('virtualMachineName'),'-tempdisk1')]",
-                       "diskSizeGB": 100,  
+                       "diskSizeGB": "[parameters('SQLTEMPDriveCapacity')]",  
                        "lun": 2,
                        "createOption":"Empty",
                       "managedDisk" :{
