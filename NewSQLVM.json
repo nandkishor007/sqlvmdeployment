@@ -57,17 +57,8 @@
            "metadata": {
              "description": "Join to local domain."
            }
-         },
-	"SQLDATADriveCapacity": {
-          "type": "string"
-          },
-        "SQLLOGSDriveCapacity": {
-          "type": "string"
-         },
-       "SQLTEMPDriveCapacity": {
-          "type": "string"
-      }
-	    
+         }
+	   
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
@@ -132,7 +123,7 @@
                     "dataDisks":[ 
                         {
                            "name": "[concat(parameters('virtualMachineName'),'-datadisk1')]",
-                           "diskSizeGB": "[parameters('SQLDATADriveCapacity')]",  
+                           "diskSizeGB": 1023,  
                             "lun": 0,
                             "createOption":"Empty",
                            "managedDisk" :{
@@ -142,7 +133,7 @@
                         },
                         {
                             "name": "[concat(parameters('virtualMachineName'),'-logdisk1')]",
-                            "diskSizeGB": "[parameters('SQLLOGSDriveCapacity')]",  
+                            "diskSizeGB": 1023,  
                             "lun": 1,
                             "createOption":"Empty",
                            "managedDisk" :{
@@ -151,7 +142,7 @@
                        },
                        {
                        "name": "[concat(parameters('virtualMachineName'),'-tempdisk1')]",
-                       "diskSizeGB": "[parameters('SQLTEMPDriveCapacity')]",  
+                       "diskSizeGB": 100,  
                        "lun": 2,
                        "createOption":"Empty",
                       "managedDisk" :{
