@@ -59,13 +59,13 @@
            }
          },
 	"SQLDATADriveCapacity": {
-          "type": "string"
+          "type": "Value"
           },
         "SQLLOGSDriveCapacity": {
-          "type": "string"
+          "type": "Value"
          },
        "SQLTEMPDriveCapacity": {
-          "type": "string"
+          "type": "Value"
       }
 	    
     },
