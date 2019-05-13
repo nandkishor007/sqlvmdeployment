@@ -57,25 +57,15 @@
            "metadata": {
              "description": "Join to local domain."
            }
-         },
-	    "fileUris": {
-            "value": "https://raw.githubusercontent.com/pgncloudadmin/sqlvmdeployment/master/Disk-SQL-SSRS.ps1"
-        },
-        "arguments": {
-            "value": null
-        }
-
+         }
+	    
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
         "vnetId": "[resourceId('ParagonDevOpsARMVNetRG','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "DomUserNameSlashes": "[concat('\\',parameters('DomUserName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
-	"UriFileNamePieces": "[split(parameters('fileUris'), '/')]",
-        "firstFileNameString": "[variables('UriFileNamePieces')[sub(length(variables('UriFileNamePieces')), 1)]]",
-        "firstFileNameBreakString": "[split(variables('firstFileNameString'), '?')]",
-        "firstFileName": "[variables('firstFileNameBreakString')[0]]"
-    },
+	},
     "resources": [
         {
             "name": "[parameters('networkInterfaceName')]",
