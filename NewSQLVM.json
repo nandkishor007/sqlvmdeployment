@@ -59,13 +59,13 @@
            }
          },
 	"SQLDATADriveCapacity": {
-          "type": "Value"
+          "type": "value"
           },
         "SQLLOGSDriveCapacity": {
-          "type": "Value"
+          "type": "value"
          },
        "SQLTEMPDriveCapacity": {
-          "type": "Value"
+          "type": "value"
       }
 	    
     },
@@ -136,7 +136,7 @@
                             "lun": 0,
                             "createOption":"Empty",
                            "managedDisk" :{
-                                "storageAccountType": "Premium_LRS"
+                                "storageAccountType": "StandardSSD_LRS"
                             }
 
                         },
@@ -146,7 +146,7 @@
                             "lun": 1,
                             "createOption":"Empty",
                            "managedDisk" :{
-                               "storageAccountType": "Premium_LRS"
+                               "storageAccountType": "StandardSSD_LRS"
                             }
                        },
                        {
@@ -155,7 +155,7 @@
                        "lun": 2,
                        "createOption":"Empty",
                       "managedDisk" :{
-                          "storageAccountType": "Premium_LRS"
+                          "storageAccountType": "StandardSSD_LRS"
                        }
                   }
                     ],
