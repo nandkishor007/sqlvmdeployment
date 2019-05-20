@@ -2,7 +2,7 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-         "location": {
+        "location": {
             "type": "string"
         },
         "networkInterfaceName": {
@@ -58,7 +58,9 @@
              "description": "Join to local domain."
            }
          }
-   "variables": {
+
+    },
+    "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
         "vnetId": "[resourceId('ParagonDevOpsARMVNetRG','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "DomUserNameSlashes": "[concat('\\',parameters('DomUserName'))]",
@@ -118,8 +120,10 @@
                             "storageAccountType": "Premium_LRS"
                         }
                     },
+                   
+
                     "imageReference": {
-                        "publisher": "MicrosoftWindowsServer",
+                      "publisher": "MicrosoftWindowsServer",
                         "offer": "WindowsServer",
                         "sku": "2012-R2-Datacenter",
                         "version": "latest"
@@ -144,7 +148,7 @@
                 "licenseType": "Windows_Server"
             }
         },
-    {
+        {
             "comments": "Join domain - JsonADDomainExtension",
             "apiVersion": "2015-06-15",
             "type": "Microsoft.Compute/virtualMachines/extensions",
