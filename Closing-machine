@@ -11,24 +11,18 @@
         "networkSecurityGroupName": {
             "type": "string"
         },
-        "networkSecurityGroupRules": {
-            "type": "array"
-        },
-        "subnetName": {
+       
+       "subnetName": {
             "type": "string"
         },
-        "virtualNetworkId": {
-            "type": "string"
-        },
+        
         "virtualMachineName": {
             "type": "string"
         },
         "virtualMachineRG": {
             "type": "string"
         },
-        "osDiskType": {
-            "type": "string"
-        },
+       
         "virtualMachineSize": {
             "type": "string"
         },
