@@ -66,7 +66,16 @@
          },
          "SQLTEMPDriveCapacity":{
              "type":"int"
-         }   
+         },
+	 "AvailabilitySetName":{
+             "type":"string" 
+         },
+         "availabilitySetPlatformFaultDomainCount": {
+            "type": "int"
+        },
+        "availabilitySetPlatformUpdateDomainCount": {
+            "type": "int"
+        }
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
@@ -109,16 +118,34 @@
                 "securityRules": []
             }
         },
+	    {
+            "name": "[parameters('AvailabilitySetName')]",
+            "type": "Microsoft.Compute/availabilitySets",
+            "apiVersion": "2019-03-01",
+            "location": "[parameters('location')]",
+            "properties": {
+            "platformFaultDomainCount": "[parameters('availabilitySetPlatformFaultDomainCount')]",
+            "platformUpdateDomainCount": "[parameters('availabilitySetPlatformUpdateDomainCount')]"
+              
+            },
+             "sku": {
+                 "name": "Aligned"
+             }
+        },
         {
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2018-06-01",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]",
+		"[concat('Microsoft.Compute/availabilitySets/', parameters('AvailabilitySetName'))]"
             ],
             "properties": {
-                "hardwareProfile": {
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('AvailabilitySetName'))]"
+                  },
+		    "hardwareProfile": {
                     "vmSize": "[parameters('virtualMachineSize')]"
                 },
                 "storageProfile": {
